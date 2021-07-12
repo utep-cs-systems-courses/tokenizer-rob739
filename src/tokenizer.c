@@ -1,7 +1,5 @@
 #include <stdio.h>
-
 #include <stdlib.h>
-
 #include "tokenizer.h"
 
 
@@ -49,9 +47,6 @@ int count_words(char *str){
     
 }
 
-/* Returns a fresly allocated new zero-terminated
- string 
-   containing <len> chars from <inStr> */
 char *copy_str(char *inStr, short len){
   char *copy = (char*)malloc((sizeof(char))*len);
   int i = 0;
@@ -62,25 +57,53 @@ char *copy_str(char *inStr, short len){
   retun copy;
 }
 
-/* Returns a freshly allocated zero-terminated vector of freshly allocated 
-   space-separated tokens from zero-terminated str.
-
-   For example, tokenize("hello world string") would result in:
-     tokens[0] = "hello"
-     tokens[1] = "world"
-     tokens[2] = "string" 
-     tokens[3] = 0
-*/
 char **tokenize(char* str){
+  
+  int num_of_tokens = count_words(str);
+  char ** tokens = (char**)malloc(sizeof(char*) * num_of_tokens);
+
+  char *start_of_token;
+  char *end_of_token= str;
+  int token_size;
+    
+  for(int i = 0;i < num_of_tokens;i++){
+    start_of_token = word_start(end_of_token);
+    end_of_token = wordterminator(start_of_token);
+    token_size = end_of_token - start_of_token;
+    *tokens+i = copy_str(start_of_token,token_size);
+  }  
+
+  return tokens;
 }
 
-/* Prints all tokens. */
+
 void print_tokens(char **tokens){
+  while(*tokens){
+    printf("\n%s",*tokens);
+    tokens++;
+  }
 }
 
-/* Frees all tokens and the vector containing themx. */
 void free_tokens(char **tokens){
+  while(*tokens){
+    free(*tokens);
+    tokens++;
+  }
 }
+
+int string_length(char *str){
+  int tally= 0;
+  while(*str != '\0'){
+    str++,tally++;
+  }
+  return tally;
+}
+
+
+
+
+
+
 
 
 

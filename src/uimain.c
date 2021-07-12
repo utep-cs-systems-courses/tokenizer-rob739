@@ -10,7 +10,6 @@ int main()
 
   while(input[0] != '@'){
     printf(">");
-    //scanf("%s",input);
     fgets(input,sizeof(input),stdin);
     printf("%s",input);
     

@@ -6,7 +6,7 @@
 /*
     The following is a simple testing script with a single example of input
     your code is expected to handle. The testing of your code should be more
-    thorough and explore other input cases.
+    thorough and explore other input cases.      
 */
 
 #define TEST_TOKENIZER 1
