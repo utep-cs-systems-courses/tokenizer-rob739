@@ -22,7 +22,7 @@ int non_space_char(char c){
 }
 
 char *word_start(char *str){
-  while(spacechar(*str)){
+  while(space_char(*str)){
     str++;
   }
   return str; 
@@ -51,10 +51,10 @@ char *copy_str(char *inStr, short len){
   char *copy = (char*)malloc((sizeof(char))*len);
   int i = 0;
   while(i<len){
-    *copy+i = *inStr+i;
+    *(copy+i) = *(inStr+i);
     i++;
   }
-  retun copy;
+  return copy;
 }
 
 char **tokenize(char* str){
@@ -68,9 +68,9 @@ char **tokenize(char* str){
     
   for(int i = 0;i < num_of_tokens;i++){
     start_of_token = word_start(end_of_token);
-    end_of_token = wordterminator(start_of_token);
+    end_of_token = word_terminator(start_of_token);
     token_size = end_of_token - start_of_token;
-    *tokens+i = copy_str(start_of_token,token_size);
+    *(tokens+i) = copy_str(start_of_token,token_size);
   }  
 
   return tokens;
@@ -90,7 +90,6 @@ void free_tokens(char **tokens){
     tokens++;
   }
 }
-
 int string_length(char *str){
   int tally= 0;
   while(*str != '\0'){
