@@ -29,7 +29,7 @@ void add_history(List *list, char *str){
     }
     iterator_node->next= (Item*)malloc(sizeof(Item));
     iterator_node->next->id= pos;
-    iterator_node->next->str= str;
+    iterator_node->next->str= copy_str(str,string_length(str));
   }
 }
 
@@ -52,10 +52,11 @@ char *get_history(List *list, int id){
 
 
 void print_history(List *list){
-  Item *iter= list->root;
+  printf("History list of inputs\n");
+  Item *iter = list->root;
   while(iter != NULL){
     printf("[%d] %s\n",iter->id,iter->str);
-    iter=iter->next;
+    iter = iter->next;
   }
 }
 
