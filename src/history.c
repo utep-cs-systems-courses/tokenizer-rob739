@@ -52,7 +52,6 @@ char *get_history(List *list, int id){
 
 
 void print_history(List *list){
-  printf("History list of inputs\n");
   Item *iter = list->root;
   while(iter != NULL){
     printf("[%d] %s\n",iter->id,iter->str);

@@ -4,7 +4,7 @@
 
 
 int space_char(char c){
-  if(c =='\t'|| c == ' '){
+  if(c =='\t'|| c == ' '|| c=='\0'){
     return 1;
   }
   else{
@@ -13,7 +13,7 @@ int space_char(char c){
 }
  
 int non_space_char(char c){
-  if(c =='\t'|| c == ' '|| c =='\0'){
+  if(c =='\t'|| c == ' '|| c=='\0'){
     return 0;
   }
   else{
@@ -30,7 +30,7 @@ char *word_start(char *str){
 
 char *word_terminator(char *word){
   while(non_space_char(*word)){
-      word++;;
+      word++;
   }
   return word;
 }
@@ -44,7 +44,6 @@ int count_words(char *str){
     str = word_terminator(str);
   }
   return tally;
-    
 }
 
 char *copy_str(char *inStr, short len){
@@ -58,10 +57,9 @@ char *copy_str(char *inStr, short len){
 }
 
 char **tokenize(char* str){
-  
-  int num_of_tokens = count_words(str);
-  char ** tokens = (char**)malloc(sizeof(char*) * num_of_tokens);
 
+  int num_of_tokens = count_words(str);
+  char **tokens = (char**)malloc(sizeof(char*) * (num_of_tokens+1));
   char *start_of_token;
   char *end_of_token= str;
   int token_size;
@@ -70,17 +68,23 @@ char **tokenize(char* str){
     start_of_token = word_start(end_of_token);
     end_of_token = word_terminator(start_of_token);
     token_size = end_of_token - start_of_token;
+    /*
+    if(i== num_of_tokens-1){
+      token_size--;
+    }
+    */
     *(tokens+i) = copy_str(start_of_token,token_size);
-  }  
-
+  }
+  *(tokens+num_of_tokens)= '\0';
   return tokens;
 }
 
 
 void print_tokens(char **tokens){
-  while(*tokens){
-    printf("\n%s",*tokens);
-    tokens++;
+
+  while(*tokens != '\0'){
+  printf("%s\n",*tokens);
+  tokens++;
   }
 }
 
